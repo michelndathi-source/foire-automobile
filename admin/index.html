@@ -14,7 +14,10 @@
   <!-- Login -->
   <div class="admin-login" id="adminLogin">
     <div class="admin-login__card">
-      <img src="../logo.png" alt="Foire" class="admin-login__logo" width="140" height="48" />
+      <div class="admin-login__brand">
+        <img src="../logo.svg" alt="" class="admin-login__logo" width="56" height="56" />
+        <span class="admin-login__wordmark">FOIRE AUTOMOBILE</span>
+      </div>
       <h1>CMS Véhicules</h1>
       <p>Connectez-vous pour gérer la collection.</p>
       <form id="loginForm">
@@ -38,10 +41,10 @@
             <span>Retour</span>
           </button>
           <div class="admin-header__brand">
-            <img src="../logo.png" alt="" width="100" height="36" />
+            <img src="../logo.svg" alt="" width="40" height="40" />
             <div>
-              <strong>CMS Foire</strong>
-              <span>Collection véhicules</span>
+              <strong>FOIRE AUTOMOBILE</strong>
+              <span>CMS · Collection véhicules</span>
             </div>
           </div>
         </div>
@@ -204,7 +207,7 @@
               <legend>Prix &amp; caractéristiques</legend>
               <div class="admin-grid-3">
                 <div class="admin-field">
-                  <label for="f_price">Prix (FCFA) *</label>
+                  <label for="f_price">Prix *</label>
                   <input id="f_price" type="number" min="0" step="1000" required />
                 </div>
                 <div class="admin-field">

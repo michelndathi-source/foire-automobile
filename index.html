@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foire Automobile — Vente de voitures au Sénégal | Dakar</title>
-  <meta name="description" content="Foire Automobile à Dakar : vente, échange, mutation, location et transit de véhicules. Prix en FCFA, stock inspecté, accompagnement local." />
+  <meta name="description" content="Foire Automobile à Dakar : vente, échange, mutation, location et transit de véhicules. Stock inspecté, accompagnement local." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -14,24 +14,23 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <div class="header__start">
-        <button type="button" class="nav-back" id="navBack" aria-label="Page précédente" title="Retour">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-          <span>Retour</span>
-        </button>
         <a href="index.html" class="logo" aria-label="Foire Automobile accueil">
-          <img src="logo.png" alt="Foire Automobile" class="logo__img" width="140" height="48" />
+          <span class="logo__frame">
+            <img src="logo.svg" alt="" class="logo__img" width="48" height="48" />
+            <span class="logo__text">FOIRE AUTOMOBILE</span>
+          </span>
         </a>
       </div>
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav__link is-current">Accueil</a>
         <a href="voitures.html" class="nav__link">Véhicules</a>
-        <a href="#mission" class="nav__link">Notre mission</a>
-        <a href="#services" class="nav__link">Services</a>
-        <a href="#apropos" class="nav__link">À propos</a>
+        <a href="services.html" class="nav__link">Services</a>
+        <a href="apropos.html" class="nav__link">À propos</a>
       </nav>
 
       <div class="header__actions">
-        <a href="https://wa.me/221777525807" class="btn btn--primary btn--sm" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="btn btn--primary btn--sm" id="openContact" data-contact-open>Contact</button>
         <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -66,6 +65,110 @@
       </div>
     </section>
 
+    <!-- Fleet (collection CMS) — juste après le hero -->
+    <section class="fleet" id="flotte">
+      <div class="container">
+        <div class="fleet__header">
+          <h2 class="section-title" id="modeles">Notre stock de véhicules</h2>
+          <div class="filters" id="fleetFilters" role="tablist" aria-label="Filtrer par catégorie"></div>
+          <div class="filters filters--brands" id="fleetBrandFilters" role="tablist" aria-label="Filtrer par marque"></div>
+          <div class="filters filters--brands filters--badges" id="fleetBadgeFilters" role="tablist" aria-label="Filtrer par choix"></div>
+        </div>
+
+        <div class="fleet__grid" id="fleetGrid"></div>
+        <div class="fleet__more">
+          <a href="voitures.html" class="btn btn--primary">
+            Voir tout le stock
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+      <div class="container">
+        <p class="section-label">Nos services</p>
+        <h2 class="section-title">Plus que la vente</h2>
+        <div class="services__grid">
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22V8"/><path d="M3 8l4.5 4.5a3 3 0 004.2 0L16 8"/><path d="M21 8l-4.5 4.5"/></svg>
+            </span>
+            <h3>Échange</h3>
+            <p>Reprenez votre ancien véhicule en échange contre un modèle du stock.</p>
+          </article>
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+            </span>
+            <h3>Mutation</h3>
+            <p>Accompagnement pour la carte grise et les formalités au Sénégal.</p>
+          </article>
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5a1 1 0 00-.4-.8l-3.6-2.7H9L5.4 11.2A1 1 0 005 12v5z"/><path d="M5 17H3v-2"/><path d="M21 17h-2v-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M9 8.5V6a1 1 0 011-1h4a1 1 0 011 1v2.5"/></svg>
+            </span>
+            <h3>Location</h3>
+            <p>Solutions de location pour vos besoins ponctuels ou professionnels.</p>
+          </article>
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13v-5l-3-4H6l-3 4v5z"/><path d="M16 17h5v-3l-2-3h-3"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/><path d="M3 12h10"/></svg>
+            </span>
+            <h3>Transit</h3>
+            <p>Véhicules et utilitaires adaptés au transport et au transit.</p>
+          </article>
+        </div>
+        <div class="services__more">
+          <a href="services.html" class="btn btn--primary">
+            Voir tous les services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="apropos">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__text">
+            <p class="section-label section-label--light">À propos</p>
+            <h2 class="section-title section-title--light">
+              Votre partenaire automobile de confiance à Dakar et au Sénégal.
+            </h2>
+            <p class="section-desc section-desc--light">
+              Du compact au SUV, véhicules inspectés, échange, mutation et suivi après-vente. Nous connaissons le marché local.
+            </p>
+            <a href="apropos.html" class="btn btn--about">
+              En savoir plus
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+          <div class="about__visual">
+            <img
+              src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=700&q=80"
+              alt="Véhicule premium chez Foire"
+              class="about__img"
+              width="400"
+              height="250"
+            />
+            <div class="review-badge">
+              <div class="review-badge__avatars">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+              </div>
+              <div class="review-badge__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+              <p class="review-badge__score"><strong>5,0</strong> · Clients Dakar</p>
+              <p class="review-badge__text">La confiance de nos clients sénégalais pour la qualité et le service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works -->
     <section class="how" id="comment">
       <div class="container how__grid">
@@ -92,7 +195,7 @@
               </span>
               <div>
                 <h3>Essayez & achetez</h3>
-                <p>Visite au parc, essai, négociation en FCFA, puis formalités (mutation, visite technique).</p>
+                <p>Visite au parc, essai, négociation, puis formalités (mutation, visite technique).</p>
               </div>
             </li>
           </ul>
@@ -144,111 +247,13 @@
       </div>
     </section>
 
-    <!-- Services -->
-    <section class="services" id="services">
-      <div class="container">
-        <p class="section-label">Nos services</p>
-        <h2 class="section-title">Plus que la vente</h2>
-        <div class="services__grid">
-          <article class="services__card">
-            <span class="services__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22V8"/><path d="M3 8l4.5 4.5a3 3 0 004.2 0L16 8"/><path d="M21 8l-4.5 4.5"/></svg>
-            </span>
-            <h3>Échange</h3>
-            <p>Reprenez votre ancien véhicule en échange contre un modèle du stock.</p>
-          </article>
-          <article class="services__card">
-            <span class="services__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
-            </span>
-            <h3>Mutation</h3>
-            <p>Accompagnement pour la carte grise et les formalités au Sénégal.</p>
-          </article>
-          <article class="services__card">
-            <span class="services__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5a1 1 0 00-.4-.8l-3.6-2.7H9L5.4 11.2A1 1 0 005 12v5z"/><path d="M5 17H3v-2"/><path d="M21 17h-2v-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M9 8.5V6a1 1 0 011-1h4a1 1 0 011 1v2.5"/></svg>
-            </span>
-            <h3>Location</h3>
-            <p>Solutions de location pour vos besoins ponctuels ou professionnels.</p>
-          </article>
-          <article class="services__card">
-            <span class="services__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13v-5l-3-4H6l-3 4v5z"/><path d="M16 17h5v-3l-2-3h-3"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/><path d="M3 12h10"/></svg>
-            </span>
-            <h3>Transit</h3>
-            <p>Véhicules et utilitaires adaptés au transport et au transit.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="about" id="apropos">
-      <div class="container">
-        <div class="about__grid">
-          <div class="about__text">
-            <p class="section-label section-label--light">À propos</p>
-            <h2 class="section-title section-title--light">
-              Votre partenaire automobile de confiance à Dakar et au Sénégal.
-            </h2>
-            <p class="section-desc section-desc--light">
-              Du compact au SUV, véhicules inspectés, prix affichés en FCFA, échange, mutation et suivi après-vente. Nous connaissons le marché local.
-            </p>
-            <a href="#mission" class="btn btn--about">
-              En savoir plus
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-          <div class="about__visual">
-            <img
-              src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=700&q=80"
-              alt="Véhicule premium chez Foire"
-              class="about__img"
-              width="400"
-              height="250"
-            />
-            <div class="review-badge">
-              <div class="review-badge__avatars">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
-              </div>
-              <div class="review-badge__stars" aria-label="5 étoiles sur 5">★★★★★</div>
-              <p class="review-badge__score"><strong>5,0</strong> · Clients Dakar</p>
-              <p class="review-badge__text">La confiance de nos clients sénégalais pour la qualité et le service.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fleet (collection CMS) -->
-    <section class="fleet" id="flotte">
-      <div class="container">
-        <div class="fleet__header">
-          <h2 class="section-title" id="modeles">Notre stock de véhicules</h2>
-          <div class="filters" id="fleetFilters" role="tablist" aria-label="Filtrer par catégorie"></div>
-          <div class="filters filters--brands" id="fleetBrandFilters" role="tablist" aria-label="Filtrer par marque"></div>
-          <div class="filters filters--brands filters--badges" id="fleetBadgeFilters" role="tablist" aria-label="Filtrer par choix"></div>
-        </div>
-
-        <div class="fleet__grid" id="fleetGrid"></div>
-        <div class="fleet__more">
-          <a href="voitures.html" class="btn btn--primary">
-            Voir tout le stock
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="cta" id="contact">
       <div class="container">
         <div class="cta__card">
           <div class="cta__content">
             <h2>Besoin d'aide pour<br />choisir la bonne voiture ?</h2>
-            <p>Nos conseillers à Dakar vous répondent sur WhatsApp et par téléphone. Prix en FCFA, échange et mutation possibles.</p>
+            <p>Nos conseillers à Dakar vous répondent sur WhatsApp et par téléphone. Échange et mutation possibles.</p>
             <a href="https://wa.me/221777525807" class="btn btn--dark" target="_blank" rel="noopener">WhatsApp — 77 752 58 07</a>
           </div>
           <div class="cta__visual">
@@ -271,6 +276,55 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">Questions fréquentes</h2>
+        <p class="section-desc faq__intro">
+          Les réponses aux questions les plus posées par nos clients à Dakar.
+        </p>
+        <div class="faq__list">
+          <details class="faq__item" open>
+            <summary class="faq__question">Où se trouve Foire Automobile ?</summary>
+            <div class="faq__answer">
+              <p>Nous sommes basés à <strong>Foire à Dakar</strong>, Sénégal. C’est notre unique lieu d’accueil pour les visites, essais et formalités.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__question">Comment prendre rendez-vous pour un essai ?</summary>
+            <div class="faq__answer">
+              <p>Utilisez le formulaire <strong>Contact</strong> en haut du site, appelez-nous ou passez au parc. Indiquez le véhicule qui vous intéresse et une date de visite souhaitée.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__question">Proposez-vous l’échange ou la reprise ?</summary>
+            <div class="faq__answer">
+              <p>Oui. Vous pouvez reprendre votre ancien véhicule en échange contre un modèle de notre stock. Nous évaluons la reprise de façon transparente.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__question">Aidez-vous pour la mutation et la carte grise ?</summary>
+            <div class="faq__answer">
+              <p>Oui. Nous accompagnons les formalités de mutation et de carte grise au Sénégal, jusqu’à la remise des clés en toute sérénité.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__question">Les prix affichés sont-ils négociables ?</summary>
+            <div class="faq__answer">
+              <p>Les prix sont affichés clairement sur chaque fiche. Toute discussion se fait en agence, selon le véhicule, son état et les options d’échange éventuelles.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__question">Proposez-vous la location ou le transit ?</summary>
+            <div class="faq__answer">
+              <p>Oui. En plus de la vente, nous proposons des solutions de <strong>location</strong> et des véhicules adaptés au <strong>transit</strong>. Consultez la page Services pour le détail.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- Mission -->
     <section class="mission" id="mission">
       <div class="container mission__inner">
@@ -279,7 +333,7 @@
           <h2 class="section-title">Achetez malin.<br />Roulez serein au Sénégal.</h2>
         </div>
         <p class="mission__text">
-          Chez Foire Automobile, chaque véhicule est inspecté, chaque prix est affiché en FCFA, et chaque client est accompagné jusqu'à la remise des clés — carte grise, mutation et après-vente inclus.
+          Chez Foire Automobile, chaque véhicule est inspecté et chaque client est accompagné jusqu'à la remise des clés — carte grise, mutation et après-vente inclus.
         </p>
       </div>
     </section>
@@ -290,7 +344,10 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a href="index.html" class="logo logo--footer" aria-label="Foire Automobile">
-            <img src="logo.png" alt="Foire Automobile" class="logo__img logo__img--footer" width="160" height="56" />
+            <span class="logo__frame">
+              <img src="logo.svg" alt="" class="logo__img logo__img--footer" width="56" height="56" />
+              <span class="logo__text">FOIRE AUTOMOBILE</span>
+            </span>
           </a>
           <p>Votre partenaire automobile de confiance au Sénégal — vente, échange, mutation, location &amp; transit.</p>
           <p class="footer__phones">
@@ -302,16 +359,16 @@
         <div class="footer__cols">
           <div class="footer__col">
             <h4>Entreprise</h4>
-            <a href="index.html#apropos">À propos</a>
-            <a href="index.html#mission">Notre mission</a>
-            <a href="index.html#services">Services</a>
+            <a href="index.html">Accueil</a>
+            <a href="apropos.html">À propos</a>
+            <a href="services.html">Services</a>
             <a href="index.html#contact">Contact</a>
           </div>
           <div class="footer__col">
             <h4>Stock</h4>
             <a href="voitures.html">Catalogue</a>
             <a href="index.html#comment">Comment ça marche</a>
-            <a href="index.html#services">Échange &amp; mutation</a>
+            <a href="services.html#echange">Échange &amp; mutation</a>
             <a href="https://wa.me/221777525807" target="_blank" rel="noopener">WhatsApp</a>
           </div>
           <div class="footer__col">
@@ -332,7 +389,7 @@
         </form>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés. Prix en FCFA.</p>
+        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés.</p>
         <div class="footer__social">
           <a href="https://wa.me/221777525807" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
           <a href="#" aria-label="Facebook">FB</a>

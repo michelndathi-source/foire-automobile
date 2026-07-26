@@ -272,7 +272,7 @@
 
     var price = Number(input.price);
     if (!Number.isFinite(price) || price < 0) {
-      throw new Error("Le prix (FCFA) est invalide");
+      throw new Error("Le prix est invalide");
     }
 
     var categories = Array.isArray(input.category)
@@ -606,8 +606,9 @@
     window.foireFormatPrice ||
     function (n) {
       return (
-        new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(n) +
-        " FCFA"
+        new Intl.NumberFormat("fr-FR", {
+          maximumFractionDigits: 0,
+        }).format(n) + " FCFA"
       );
     };
 

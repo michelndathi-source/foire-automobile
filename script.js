@@ -3,8 +3,26 @@
 (function () {
   "use strict";
 
-  // Bouton retour — dans le header (pas flottant par-dessus le design)
+  // Accueil : pas de bouton retour
+  function isHomePage() {
+    const path = (window.location.pathname || "").replace(/\\/g, "/");
+    const file = path.split("/").pop() || "";
+    return (
+      file === "" ||
+      file === "index.html" ||
+      path.endsWith("/") ||
+      /\/site%20vitrene\/?$/i.test(path)
+    );
+  }
+
+  // Bouton retour — dans le header (sauf page d'accueil)
   function ensureNavBack() {
+    if (isHomePage()) {
+      const existing = document.getElementById("navBack");
+      if (existing) existing.remove();
+      return;
+    }
+
     const existing = document.getElementById("navBack");
     if (existing) {
       existing.addEventListener("click", onNavBack);
@@ -18,7 +36,6 @@
     if (!start) {
       start = document.createElement("div");
       start.className = "header__start";
-      // Déplacer le logo dans header__start
       const logo = headerInner.querySelector(".logo");
       if (logo) start.appendChild(logo);
       headerInner.insertBefore(start, headerInner.firstChild);
@@ -102,5 +119,263 @@
       }, 2200);
     });
   }
+
+  // ===== Formulaire de contact (remplace le bouton WhatsApp navbar) =====
+  function ensureContactModal() {
+    if (document.getElementById("contactModal")) return;
+
+    const wrap = document.createElement("div");
+    wrap.id = "contactModal";
+    wrap.className = "contact-modal";
+    wrap.hidden = true;
+    wrap.setAttribute("role", "dialog");
+    wrap.setAttribute("aria-modal", "true");
+    wrap.setAttribute("aria-labelledby", "contactModalTitle");
+    wrap.innerHTML = `
+      <div class="contact-modal__backdrop" data-contact-close tabindex="-1"></div>
+      <div class="contact-modal__dialog">
+        <button type="button" class="contact-modal__close" data-contact-close aria-label="Fermer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p class="section-label">Contact</p>
+        <h2 id="contactModalTitle" class="contact-modal__title">Écrivez-nous</h2>
+        <p class="contact-modal__lead">Laissez vos coordonnées, un conseiller Foire à Dakar vous répond rapidement.</p>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="contact-form__row">
+            <div class="contact-form__field">
+              <label for="contactName">Nom complet *</label>
+              <input type="text" id="contactName" name="name" required autocomplete="name" placeholder="Votre nom" />
+            </div>
+            <div class="contact-form__field">
+              <label for="contactPhone">Téléphone *</label>
+              <input type="tel" id="contactPhone" name="phone" required autocomplete="tel" placeholder="77 XXX XX XX" />
+            </div>
+          </div>
+          <div class="contact-form__field">
+            <label for="contactEmail">E-mail</label>
+            <input type="email" id="contactEmail" name="email" autocomplete="email" placeholder="vous@email.com" />
+          </div>
+          <div class="contact-form__field">
+            <label for="contactSubject">Sujet</label>
+            <select id="contactSubject" name="subject">
+              <option value="Demande d'information">Demande d'information</option>
+              <option value="Essai véhicule">Essai véhicule</option>
+              <option value="Échange / reprise">Échange / reprise</option>
+              <option value="Mutation / carte grise">Mutation / carte grise</option>
+              <option value="Location">Location</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <div class="contact-form__field">
+            <label for="contactVehicle">Véhicule intéressé <span class="contact-form__optional">(optionnel)</span></label>
+            <select id="contactVehicle" name="vehicle">
+              <option value="">— Aucun véhicule précis —</option>
+            </select>
+          </div>
+          <div class="contact-form__field">
+            <label for="contactMessage">Message *</label>
+            <textarea id="contactMessage" name="message" rows="4" required placeholder="Décrivez votre besoin…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full" id="contactSubmit">Envoyer le message</button>
+          <p class="contact-form__status" id="contactStatus" hidden></p>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(wrap);
+  }
+
+  function getPublicVehiclesForContact() {
+    if (typeof window.foireGetPublicVehicles === "function") {
+      return window.foireGetPublicVehicles() || [];
+    }
+    if (window.FoireCMS && typeof window.FoireCMS.getPublicVehicles === "function") {
+      return window.FoireCMS.getPublicVehicles() || [];
+    }
+    return (window.FOIRE_VEHICLES || []).filter(function (v) {
+      return v.published !== "offline";
+    });
+  }
+
+  function formatVehicleOption(v) {
+    const price =
+      typeof window.foireFormatPrice === "function"
+        ? window.foireFormatPrice(v.price)
+        : String(v.price || "") + " FCFA";
+    const parts = [v.brand, v.name, v.version].filter(Boolean).join(" ");
+    return parts + (price ? " — " + price : "");
+  }
+
+  function fillContactVehicles(preselectId) {
+    const select = document.getElementById("contactVehicle");
+    if (!select) return;
+
+    const current = preselectId || select.value || "";
+    const vehicles = getPublicVehiclesForContact().slice().sort(function (a, b) {
+      const na = [a.brand, a.name].join(" ");
+      const nb = [b.brand, b.name].join(" ");
+      return na.localeCompare(nb, "fr");
+    });
+
+    select.innerHTML =
+      '<option value="">— Aucun véhicule précis —</option>' +
+      vehicles
+        .map(function (v) {
+          const label = formatVehicleOption(v);
+          const value = [
+            v.id || "",
+            v.brand || "",
+            v.name || "",
+            v.version || "",
+            typeof window.foireFormatPrice === "function"
+              ? window.foireFormatPrice(v.price)
+              : String(v.price || ""),
+          ].join(" | ");
+          return (
+            '<option value="' +
+            String(value).replace(/"/g, "&quot;") +
+            '" data-id="' +
+            String(v.id || "").replace(/"/g, "&quot;") +
+            '">' +
+            label.replace(/</g, "&lt;") +
+            "</option>"
+          );
+        })
+        .join("");
+
+    // Pré-sélection (ex. page fiche véhicule)
+    if (current) {
+      const byValue = Array.prototype.find.call(select.options, function (o) {
+        return o.value === current;
+      });
+      if (byValue) {
+        select.value = current;
+      } else {
+        const byId = select.querySelector('option[data-id="' + CSS.escape(current) + '"]');
+        if (byId) select.value = byId.value;
+      }
+    }
+
+    // Si on est sur une fiche véhicule, préremplir
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const pageId = params.get("id");
+      if (pageId && !select.value) {
+        const opt = select.querySelector('option[data-id="' + CSS.escape(pageId) + '"]');
+        if (opt) select.value = opt.value;
+      }
+    } catch (e) {}
+  }
+
+  function openContactModal() {
+    ensureContactModal();
+    fillContactVehicles();
+    const modal = document.getElementById("contactModal");
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    const first = document.getElementById("contactName");
+    if (first) setTimeout(() => first.focus(), 50);
+  }
+
+  function closeContactModal() {
+    const modal = document.getElementById("contactModal");
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  ensureContactModal();
+
+  document.addEventListener("click", (e) => {
+    const openBtn = e.target.closest("[data-contact-open], #openContact");
+    if (openBtn) {
+      e.preventDefault();
+      openContactModal();
+      return;
+    }
+    if (e.target.closest("[data-contact-close]")) {
+      closeContactModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeContactModal();
+  });
+
+  document.addEventListener("submit", (e) => {
+    const form = e.target;
+    if (!form || form.id !== "contactForm") return;
+    e.preventDefault();
+
+    const name = form.querySelector("#contactName");
+    const phone = form.querySelector("#contactPhone");
+    const email = form.querySelector("#contactEmail");
+    const subject = form.querySelector("#contactSubject");
+    const vehicle = form.querySelector("#contactVehicle");
+    const message = form.querySelector("#contactMessage");
+    const status = form.querySelector("#contactStatus");
+    const submitBtn = form.querySelector("#contactSubmit");
+
+    const nameVal = name ? name.value.trim() : "";
+    const phoneVal = phone ? phone.value.trim() : "";
+    const msgVal = message ? message.value.trim() : "";
+    const emailVal = email ? email.value.trim() : "";
+    const subjectVal = subject ? subject.value : "Contact";
+    const vehicleVal = vehicle ? vehicle.value.trim() : "";
+
+    if (!nameVal || !phoneVal || !msgVal) {
+      if (status) {
+        status.hidden = false;
+        status.className = "contact-form__status is-err";
+        status.textContent = "Merci de remplir le nom, le téléphone et le message.";
+      }
+      return;
+    }
+
+    // Envoi via e-mail (site statique) + confirmation
+    const body = [
+      "Nouveau message — Foire Automobile",
+      "",
+      "Nom : " + nameVal,
+      "Téléphone : " + phoneVal,
+      emailVal ? "E-mail : " + emailVal : null,
+      "Sujet : " + subjectVal,
+      vehicleVal ? "Véhicule intéressé : " + vehicleVal.replace(/\s*\|\s*/g, " — ") : "Véhicule intéressé : non précisé",
+      "",
+      "Message :",
+      msgVal,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const mailto =
+      "mailto:contact@foireautomobile.sn?subject=" +
+      encodeURIComponent("[Foire] " + subjectVal + " — " + nameVal) +
+      "&body=" +
+      encodeURIComponent(body);
+
+    try {
+      window.location.href = mailto;
+    } catch (err) {}
+
+    if (status) {
+      status.hidden = false;
+      status.className = "contact-form__status is-ok";
+      status.textContent =
+        "Merci " + nameVal + " ! Votre message est prêt. Nous vous recontactons très vite à Dakar.";
+    }
+    if (submitBtn) {
+      submitBtn.textContent = "Message envoyé";
+      submitBtn.disabled = true;
+    }
+    form.reset();
+    setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.textContent = "Envoyer le message";
+        submitBtn.disabled = false;
+      }
+      closeContactModal();
+    }, 2200);
+  });
 
 })();

@@ -206,7 +206,7 @@
   };
 
   function formatPrice(n) {
-    return window.foireFormatPrice ? window.foireFormatPrice(n) : n + " FCFA";
+    return window.foireFormatPrice ? window.foireFormatPrice(n) : String(n) + " FCFA";
   }
 
   function escapeHtml(s) {

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos — Foire Automobile | Dakar, Sénégal</title>
+  <meta name="description" content="Découvrez Foire Automobile à Dakar : partenaire de confiance pour la vente, l'échange, la mutation, la location et le transit de véhicules au Sénégal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <div class="header__start">
+        <button type="button" class="nav-back" id="navBack" aria-label="Page précédente" title="Retour">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          <span>Retour</span>
+        </button>
+        <a href="index.html" class="logo" aria-label="Foire Automobile accueil">
+          <span class="logo__frame">
+            <img src="logo.svg" alt="" class="logo__img" width="48" height="48" />
+            <span class="logo__text">FOIRE AUTOMOBILE</span>
+          </span>
+        </a>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav__link">Accueil</a>
+        <a href="voitures.html" class="nav__link">Véhicules</a>
+        <a href="services.html" class="nav__link">Services</a>
+        <a href="apropos.html" class="nav__link is-current">À propos</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="btn btn--primary btn--sm" id="openContact" data-contact-open>Contact</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="section-label">À propos de nous</p>
+        <h1 class="page-hero__title">Votre partenaire automobile de <span class="text-accent">confiance</span></h1>
+        <p class="page-hero__desc">
+          Basés à Dakar, nous accompagnons particuliers et professionnels dans l’achat, l’échange et les formalités de leurs véhicules au Sénégal.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-page">
+      <div class="container about-page__intro">
+        <div class="about-page__copy">
+          <p class="section-label">Qui sommes-nous</p>
+          <h2 class="section-title">Foire Automobile, à vos côtés à Dakar</h2>
+          <p class="section-desc">
+            Foire Automobile est un acteur local de la vente de véhicules au Sénégal. Du compact au SUV, chaque voiture de notre stock est inspectée, présentée avec clarté et proposée avec un accompagnement complet — de la visite jusqu’à la remise des clés.
+          </p>
+          <p class="section-desc">
+            Nous connaissons le marché sénégalais : routes, usages, formalités administratives et attentes des clients. Notre priorité est simple : vous faire gagner du temps, de la confiance et de la sérénité.
+          </p>
+        </div>
+        <div class="about-page__visual">
+          <img
+            src="how-bg.jpg"
+            alt="Véhicule Foire Automobile à Dakar"
+            width="640"
+            height="420"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="about-page about-page--dark">
+      <div class="container">
+        <p class="section-label section-label--light">Nos valeurs</p>
+        <h2 class="section-title section-title--light">Ce qui guide chaque vente</h2>
+        <div class="about-values">
+          <article class="about-values__card">
+            <span class="about-values__num" aria-hidden="true">01</span>
+            <h3>Transparence</h3>
+            <p>Photos détaillées, état annoncé, prix affichés clairement. Vous savez ce que vous achetez.</p>
+          </article>
+          <article class="about-values__card">
+            <span class="about-values__num" aria-hidden="true">02</span>
+            <h3>Proximité</h3>
+            <p>Un seul lieu d’accueil : Foire à Dakar. Conseillers joignables par téléphone, e-mail ou formulaire.</p>
+          </article>
+          <article class="about-values__card">
+            <span class="about-values__num" aria-hidden="true">03</span>
+            <h3>Accompagnement</h3>
+            <p>Échange, mutation, carte grise, visite technique : nous restons avec vous jusqu’au bout.</p>
+          </article>
+          <article class="about-values__card">
+            <span class="about-values__num" aria-hidden="true">04</span>
+            <h3>Qualité locale</h3>
+            <p>Véhicules adaptés aux usages au Sénégal, avec un suivi après-vente et des conseils pratiques.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-page">
+      <div class="container">
+        <p class="section-label">Ce que nous proposons</p>
+        <h2 class="section-title">Plus que la vente de voitures</h2>
+        <div class="about-offers">
+          <article class="about-offers__item">
+            <h3>Vente de véhicules</h3>
+            <p>Berlines, SUV, luxe, sport et utilitaires inspectés, prêts pour essai et livraison à Dakar.</p>
+          </article>
+          <article class="about-offers__item">
+            <h3>Échange / reprise</h3>
+            <p>Reprenez votre ancien véhicule en échange contre un modèle de notre stock.</p>
+          </article>
+          <article class="about-offers__item">
+            <h3>Mutation &amp; formalités</h3>
+            <p>Accompagnement pour la carte grise et les démarches administratives au Sénégal.</p>
+          </article>
+          <article class="about-offers__item">
+            <h3>Location &amp; transit</h3>
+            <p>Solutions de location et véhicules adaptés au transport et au transit.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-page about-page--cta">
+      <div class="container about-page__cta-inner">
+        <div>
+          <p class="section-label section-label--light">Nous rencontrer</p>
+          <h2 class="section-title section-title--light">Venez à Foire à Dakar</h2>
+          <p class="section-desc section-desc--light">
+            Un seul lieu d’agence. Prenez rendez-vous, parcourez le stock en ligne ou contactez un conseiller.
+          </p>
+          <ul class="about-contact-list">
+            <li><strong>Lieu</strong> — Foire à Dakar, Sénégal</li>
+            <li><strong>Téléphones</strong> — <a href="tel:+221777525807">77 752 58 07</a> · <a href="tel:+221785970303">78 597 03 03</a> · <a href="tel:+221785463029">78 546 30 29</a></li>
+            <li><strong>E-mail</strong> — <a href="mailto:contact@foireautomobile.sn">contact@foireautomobile.sn</a></li>
+          </ul>
+        </div>
+        <div class="about-page__cta-actions">
+          <a href="voitures.html" class="btn btn--primary">Voir les véhicules</a>
+          <button type="button" class="btn btn--about" data-contact-open>Nous contacter</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="logo logo--footer" aria-label="Foire Automobile">
+            <span class="logo__frame">
+              <img src="logo.svg" alt="" class="logo__img logo__img--footer" width="56" height="56" />
+              <span class="logo__text">FOIRE AUTOMOBILE</span>
+            </span>
+          </a>
+          <p>Votre partenaire automobile de confiance au Sénégal — vente, échange, mutation, location &amp; transit.</p>
+          <p class="footer__phones">
+            <a href="tel:+221777525807">77 752 58 07</a> ·
+            <a href="tel:+221785970303">78 597 03 03</a> ·
+            <a href="tel:+221785463029">78 546 30 29</a>
+          </p>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4>Entreprise</h4>
+            <a href="index.html">Accueil</a>
+            <a href="apropos.html">À propos</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div class="footer__col">
+            <h4>Stock</h4>
+            <a href="voitures.html">Catalogue</a>
+            <a href="index.html#comment">Comment ça marche</a>
+            <a href="index.html#services">Échange &amp; mutation</a>
+            <a href="https://wa.me/221777525807" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+          <div class="footer__col">
+            <h4>Contact</h4>
+            <a href="tel:+221777525807">77 752 58 07</a>
+            <a href="tel:+221785970303">78 597 03 03</a>
+            <a href="mailto:contact@foireautomobile.sn">contact@foireautomobile.sn</a>
+            <span class="footer__muted">Dakar, Sénégal</span>
+          </div>
+        </div>
+        <form class="footer__newsletter" id="newsletter">
+          <h4>Restez informé</h4>
+          <p>Nouveautés du stock et offres à Dakar.</p>
+          <div class="footer__newsletter-row">
+            <input type="email" placeholder="Votre e-mail" required aria-label="Adresse e-mail" />
+            <button type="submit" class="btn btn--primary btn--sm">S'abonner</button>
+          </div>
+        </form>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés.</p>
+        <div class="footer__social">
+          <a href="https://wa.me/221777525807" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/vehicles.js"></script>
+  <script src="data/cms-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -49,11 +49,32 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
+.admin-login__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+  padding: 0.4rem 0.75rem 0.4rem 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .admin-login__logo {
   display: block;
-  margin-bottom: 1rem;
-  height: 44px;
-  width: auto;
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-login__wordmark {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.15;
 }
 
 .admin-login h1 {
@@ -170,9 +191,12 @@
 
 .admin-header__brand img {
   display: block;
-  height: 32px;
-  width: auto;
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
   flex-shrink: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .admin-header__brand strong {

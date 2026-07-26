@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fiche véhicule — Foire Automobile Sénégal</title>
-  <meta name="description" content="Détails, photos et état du véhicule chez Foire Automobile à Dakar. Prix en FCFA." />
+  <meta name="description" content="Détails, photos et état du véhicule chez Foire Automobile à Dakar." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,17 +19,20 @@
           <span>Retour</span>
         </button>
         <a href="index.html" class="logo" aria-label="Foire Automobile accueil">
-          <img src="logo.png" alt="Foire Automobile" class="logo__img" width="140" height="48" />
+          <span class="logo__frame">
+            <img src="logo.svg" alt="" class="logo__img" width="48" height="48" />
+            <span class="logo__text">FOIRE AUTOMOBILE</span>
+          </span>
         </a>
       </div>
       <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav__link">Accueil</a>
         <a href="voitures.html" class="nav__link">Véhicules</a>
-        <a href="index.html#mission" class="nav__link">Notre mission</a>
-        <a href="index.html#apropos" class="nav__link">À propos</a>
-        <a href="index.html#contact" class="nav__link">Contact</a>
+        <a href="services.html" class="nav__link">Services</a>
+        <a href="apropos.html" class="nav__link">À propos</a>
       </nav>
       <div class="header__actions">
-        <a href="https://wa.me/221777525807" class="btn btn--primary btn--sm" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="btn btn--primary btn--sm" id="openContact" data-contact-open>Contact</button>
         <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -48,7 +51,10 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a href="index.html" class="logo logo--footer" aria-label="Foire Automobile">
-            <img src="logo.png" alt="Foire Automobile" class="logo__img logo__img--footer" width="160" height="56" />
+            <span class="logo__frame">
+              <img src="logo.svg" alt="" class="logo__img logo__img--footer" width="56" height="56" />
+              <span class="logo__text">FOIRE AUTOMOBILE</span>
+            </span>
           </a>
           <p>Votre partenaire automobile de confiance au Sénégal — vente, échange, mutation, location &amp; transit.</p>
           <p class="footer__phones">
@@ -60,16 +66,16 @@
         <div class="footer__cols">
           <div class="footer__col">
             <h4>Entreprise</h4>
-            <a href="index.html#apropos">À propos</a>
-            <a href="index.html#mission">Notre mission</a>
-            <a href="index.html#services">Services</a>
+            <a href="index.html">Accueil</a>
+            <a href="apropos.html">À propos</a>
+            <a href="services.html">Services</a>
             <a href="index.html#contact">Contact</a>
           </div>
           <div class="footer__col">
             <h4>Stock</h4>
             <a href="voitures.html">Catalogue</a>
             <a href="index.html#comment">Comment ça marche</a>
-            <a href="index.html#services">Échange &amp; mutation</a>
+            <a href="services.html#echange">Échange &amp; mutation</a>
             <a href="https://wa.me/221777525807" target="_blank" rel="noopener">WhatsApp</a>
           </div>
           <div class="footer__col">
@@ -90,7 +96,7 @@
         </form>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés. Prix en FCFA.</p>
+        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés.</p>
         <div class="footer__social">
           <a href="https://wa.me/221777525807" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
           <a href="#" aria-label="Facebook">FB</a>

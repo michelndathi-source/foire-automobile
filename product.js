@@ -188,7 +188,7 @@
                 </a>
                 <a href="tel:+221777525807" class="btn btn--outline-dark btn--full">Appeler — 77 752 58 07</a>
               </div>
-              <p class="product__location">📍 Disponible à ${vehicle.location} · Prix en FCFA</p>
+              <p class="product__location">📍 Disponible à ${vehicle.location}</p>
             </aside>
           </div>
         </div>
