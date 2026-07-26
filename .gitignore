@@ -1,0 +1,19 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / temp
+*.log
+.tmp/
+temp/
+
+# Local env
+.env
+.env.*

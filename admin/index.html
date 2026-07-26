@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin CMS — Collection véhicules | Foire Automobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+  <!-- Login -->
+  <div class="admin-login" id="adminLogin">
+    <div class="admin-login__card">
+      <img src="../logo.png" alt="Foire" class="admin-login__logo" width="140" height="48" />
+      <h1>CMS Véhicules</h1>
+      <p>Connectez-vous pour gérer la collection.</p>
+      <form id="loginForm">
+        <label for="adminPassword">Mot de passe</label>
+        <input type="password" id="adminPassword" value="foire2026" placeholder="foire2026" required autocomplete="current-password" />
+        <p class="admin-login__hint">Mot de passe : <code>foire2026</code> (prérempli)</p>
+        <button type="submit" class="btn btn--primary btn--full" id="btnLogin">Se connecter</button>
+        <p class="admin-error" id="loginError" hidden>Mot de passe incorrect</p>
+      </form>
+      <a href="../index.html" class="admin-back">← Retour au site</a>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="admin-app" id="adminApp" hidden>
+    <header class="admin-header">
+      <div class="admin-header__inner">
+        <div class="admin-header__top">
+          <button type="button" class="admin-header__back" id="navBack" aria-label="Page précédente" title="Retour">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            <span>Retour</span>
+          </button>
+          <div class="admin-header__brand">
+            <img src="../logo.png" alt="" width="100" height="36" />
+            <div>
+              <strong>CMS Foire</strong>
+              <span>Collection véhicules</span>
+            </div>
+          </div>
+        </div>
+        <div class="admin-header__actions">
+          <button type="button" class="btn btn--sm admin-btn-outline" id="btnNavList">Collection</button>
+          <button type="button" class="btn btn--sm admin-btn-outline" id="btnNavCats">Catégories</button>
+          <a href="../voitures.html" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Voir le site</a>
+          <button type="button" class="btn btn--sm admin-btn-outline" id="btnLogout">Déconnexion</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <aside class="admin-sidebar" id="adminSidebar">
+        <button type="button" class="btn btn--primary btn--full" id="btnNewVehicle">+ Ajouter un véhicule</button>
+
+        <div class="admin-sidebar__filters">
+          <label for="adminPubFilter">Mise en ligne</label>
+          <select id="adminPubFilter">
+            <option value="all">Tous (en ligne + hors ligne)</option>
+            <option value="online">En ligne</option>
+            <option value="offline">Hors ligne</option>
+          </select>
+
+          <label for="adminBadgeFilter">Choix / mise en avant</label>
+          <select id="adminBadgeFilter">
+            <option value="all">Tous</option>
+            <option value="new">Nouveau</option>
+            <option value="bestseller">Les plus vendus</option>
+            <option value="promo">Promo</option>
+            <option value="featured">Coup de cœur</option>
+            <option value="none">Sans badge</option>
+          </select>
+
+          <label for="adminCatFilter">Catégorie</label>
+          <select id="adminCatFilter">
+            <option value="all">Toutes</option>
+          </select>
+
+          <label for="adminBrandFilter">Marque</label>
+          <select id="adminBrandFilter">
+            <option value="all">Toutes</option>
+          </select>
+
+          <label for="adminSearch">Recherche</label>
+          <input type="search" id="adminSearch" placeholder="Nom, marque…" />
+        </div>
+
+        <div class="admin-sidebar__tools">
+          <button type="button" class="btn btn--sm btn--full admin-btn-outline" id="btnExport">Exporter JSON</button>
+          <label class="btn btn--sm btn--full admin-btn-outline admin-import-label">
+            Importer JSON
+            <input type="file" id="btnImport" accept="application/json,.json" hidden />
+          </label>
+          <button type="button" class="btn btn--sm btn--full admin-btn-danger" id="btnReset">Réinitialiser le seed</button>
+        </div>
+
+        <p class="admin-sidebar__meta" id="adminMeta">0 véhicule(s)</p>
+      </aside>
+
+      <section class="admin-content">
+        <!-- Liste -->
+        <div id="adminListView">
+          <div class="admin-list-header">
+            <h1>Collection véhicules</h1>
+            <p>Photos uploadées depuis le PC, catégories, mise en ligne et badges. Tout est relié au site public.</p>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table" id="adminTable">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Véhicule</th>
+                  <th>Marque</th>
+                  <th>Catégories</th>
+                  <th>Statut</th>
+                  <th>Choix</th>
+                  <th>Prix</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="adminTableBody"></tbody>
+            </table>
+          </div>
+          <p class="admin-empty" id="adminEmpty" hidden>Aucun véhicule. Cliquez sur « Ajouter un véhicule ».</p>
+        </div>
+
+        <!-- Catégories -->
+        <div id="adminCatsView" hidden>
+          <div class="admin-list-header">
+            <button type="button" class="admin-link-back" id="btnBackFromCats">← Retour collection</button>
+            <h1>Catégories</h1>
+            <p>Créez, renommez ou supprimez des catégories. Elles alimentent les filtres du site et du CMS.</p>
+          </div>
+          <form class="admin-cat-form" id="catCreateForm">
+            <input type="text" id="newCatLabel" placeholder="Nom de la nouvelle catégorie" required />
+            <button type="submit" class="btn btn--primary btn--sm">Créer</button>
+          </form>
+          <ul class="admin-cat-list" id="adminCatList"></ul>
+          <p class="admin-form-status" id="catStatus" hidden></p>
+        </div>
+
+        <!-- Formulaire véhicule -->
+        <div id="adminFormView" hidden>
+          <div class="admin-form-header">
+            <button type="button" class="admin-link-back" id="btnBackList">← Retour à la liste</button>
+            <h1 id="formTitle">Nouveau véhicule</h1>
+          </div>
+
+          <form class="admin-form" id="vehicleForm">
+            <input type="hidden" id="f_previousId" />
+            <input type="hidden" id="f_cover" />
+
+            <fieldset>
+              <legend>Identité &amp; publication</legend>
+              <div class="admin-grid-2">
+                <div class="admin-field">
+                  <label for="f_name">Nom *</label>
+                  <input id="f_name" required placeholder="ex. Toyota Fortuner" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_brand">Marque *</label>
+                  <input id="f_brand" required list="brandList" placeholder="ex. Toyota" />
+                  <datalist id="brandList"></datalist>
+                </div>
+                <div class="admin-field">
+                  <label for="f_version">Version / finition</label>
+                  <input id="f_version" placeholder="ex. 2.8 D-4D Legend" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_id">ID URL (auto si vide)</label>
+                  <input id="f_id" placeholder="toyota-fortuner" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_published">Mise en ligne *</label>
+                  <select id="f_published">
+                    <option value="online">En ligne (visible sur le site)</option>
+                    <option value="offline">Hors ligne (masqué)</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label for="f_badge">Choix / mise en avant</label>
+                  <select id="f_badge">
+                    <option value="none">Aucun</option>
+                    <option value="new">Nouveau</option>
+                    <option value="bestseller">Les plus vendus</option>
+                    <option value="promo">Promo</option>
+                    <option value="featured">Coup de cœur</option>
+                  </select>
+                </div>
+              </div>
+              <div class="admin-field">
+                <span class="admin-label">Catégories * <small>(cochez une ou plusieurs)</small></span>
+                <div class="admin-checks" id="f_categories"></div>
+                <p class="admin-field-hint">Gérez les catégories via le bouton « Catégories » en haut.</p>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Prix &amp; caractéristiques</legend>
+              <div class="admin-grid-3">
+                <div class="admin-field">
+                  <label for="f_price">Prix (FCFA) *</label>
+                  <input id="f_price" type="number" min="0" step="1000" required />
+                </div>
+                <div class="admin-field">
+                  <label for="f_year">Année</label>
+                  <input id="f_year" type="number" min="1990" max="2035" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_mileage">Kilométrage</label>
+                  <input id="f_mileage" type="number" min="0" step="100" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_fuel">Carburant</label>
+                  <select id="f_fuel">
+                    <option>Diesel</option>
+                    <option>Essence</option>
+                    <option>Hybride</option>
+                    <option>Électrique</option>
+                    <option>GPL</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label for="f_transmission">Boîte</label>
+                  <select id="f_transmission">
+                    <option>Automatique</option>
+                    <option>Manuelle</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label for="f_power">Puissance</label>
+                  <input id="f_power" placeholder="ex. 190 ch" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_doors">Portes</label>
+                  <input id="f_doors" type="number" min="2" max="6" value="4" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_seats">Places</label>
+                  <input id="f_seats" type="number" min="2" max="9" value="5" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_color">Couleur</label>
+                  <input id="f_color" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_condition">État</label>
+                  <select id="f_condition">
+                    <option>Excellent</option>
+                    <option>Très bon</option>
+                    <option>Bon</option>
+                    <option>Correct</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label for="f_warranty">Garantie</label>
+                  <input id="f_warranty" value="12 mois Foire SN" />
+                </div>
+                <div class="admin-field">
+                  <label for="f_location">Lieu</label>
+                  <input id="f_location" value="Foire à Dakar" />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Textes</legend>
+              <div class="admin-field">
+                <label for="f_tagline">Accroche</label>
+                <input id="f_tagline" placeholder="Courte phrase d'accroche" />
+              </div>
+              <div class="admin-field">
+                <label for="f_description">Description</label>
+                <textarea id="f_description" rows="4" placeholder="Description détaillée du véhicule"></textarea>
+              </div>
+              <div class="admin-grid-2">
+                <div class="admin-field">
+                  <label for="f_highlights">Points forts <small>(1 par ligne)</small></label>
+                  <textarea id="f_highlights" rows="4"></textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="f_equipment">Équipements <small>(1 par ligne)</small></label>
+                  <textarea id="f_equipment" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="admin-field">
+                <label for="f_specs">Fiche technique <small>(clé : valeur, 1 par ligne)</small></label>
+                <textarea id="f_specs" rows="5"></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>État (notes)</legend>
+              <div class="admin-grid-3">
+                <div class="admin-field">
+                  <label for="f_cond_ext">Extérieur</label>
+                  <textarea id="f_cond_ext" rows="3"></textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="f_cond_int">Intérieur</label>
+                  <textarea id="f_cond_int" rows="3"></textarea>
+                </div>
+                <div class="admin-field">
+                  <label for="f_cond_mec">Mécanique</label>
+                  <textarea id="f_cond_mec" rows="3"></textarea>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="admin-photos">
+              <legend>Photos — upload depuis le PC</legend>
+              <div class="admin-field">
+                <label for="f_cover_file">Photo de couverture *</label>
+                <input type="file" id="f_cover_file" accept="image/*" />
+                <p class="admin-field-hint">JPG, PNG ou WEBP — compressée automatiquement pour le site.</p>
+                <div class="admin-preview" id="coverPreview"></div>
+                <button type="button" class="btn btn--sm admin-btn-outline" id="btnClearCover" hidden>Retirer la couverture</button>
+              </div>
+              <div class="admin-field">
+                <label for="f_gallery_files">Galerie (plusieurs photos)</label>
+                <input type="file" id="f_gallery_files" accept="image/*" multiple />
+                <p class="admin-field-hint">
+                  Ajoutez des images et cliquez sur <strong>Remplacer la photo</strong> pour changer une image individuellement.
+                </p>
+                <div class="admin-gallery-grid" id="galleryPreview"></div>
+              </div>
+            </fieldset>
+
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn--primary">Enregistrer dans la collection</button>
+              <button type="button" class="btn admin-btn-outline" id="btnCancelForm">Annuler</button>
+              <button type="button" class="btn admin-btn-danger" id="btnDeleteVehicle" hidden>Supprimer</button>
+            </div>
+            <p class="admin-form-status" id="formStatus" hidden></p>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../data/vehicles.js"></script>
+  <script src="../data/cms-store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
