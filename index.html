@@ -30,7 +30,7 @@
       </nav>
 
       <div class="header__actions">
-        <button type="button" class="btn btn--primary btn--sm" id="openContact" data-contact-open>Contact</button>
+        <button type="button" class="btn btn--primary btn--sm btn--nav-contact" id="openContact" data-contact-open>Contact</button>
         <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -59,7 +59,10 @@
               Voir les véhicules
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#comment" class="btn btn--ghost">En savoir plus</a>
+            <button type="button" class="btn btn--ghost" data-contact-open>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Nous Contacter
+            </button>
           </div>
         </div>
       </div>
@@ -214,34 +217,35 @@
             width="640"
             height="480"
           />
-          <div class="search-card" role="search" aria-label="Prendre rendez-vous">
+          <div class="search-card rdv-card" aria-label="Prise de rendez-vous">
+            <p class="rdv-card__badge">Prise de rendez-vous</p>
+            <h3 class="rdv-card__title">Réserver une visite</h3>
+            <p class="rdv-card__desc">
+              Choisissez une date disponible via Calendly pour une visite au parc ou un rendez-vous à Foire à Dakar.
+            </p>
             <div class="search-card__field">
-              <label for="location">Lieu de l'agence</label>
+              <label>Lieu de l'agence</label>
               <div class="search-card__input">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <input type="text" id="location" value="Foire à Dakar" readonly />
+                <input type="text" value="Foire à Dakar" readonly />
               </div>
             </div>
-            <div class="search-card__row">
-              <div class="search-card__field">
-                <label for="from-date">Visite à partir du</label>
-                <div class="search-card__input">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
-                  <input type="date" id="from-date" value="2026-07-28" />
-                </div>
-              </div>
-              <div class="search-card__field">
-                <label for="to-date">Jusqu'au</label>
-                <div class="search-card__input">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
-                  <input type="date" id="to-date" value="2026-08-05" />
-                </div>
+            <div class="search-card__field">
+              <label for="rdvType">Type de rendez-vous</label>
+              <div class="search-card__input">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+                <select id="rdvType" aria-label="Type de rendez-vous">
+                  <option value="visite">Visite au parc</option>
+                  <option value="essai">Essai véhicule</option>
+                  <option value="rdv">Rendez-vous conseiller</option>
+                </select>
               </div>
             </div>
-            <button type="button" class="btn btn--primary btn--full search-card__btn" id="searchCars">
-              Rechercher
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <button type="button" class="btn btn--primary btn--full search-card__btn" id="rdvCalendly">
+              Voir les dates disponibles
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
+            <p class="rdv-card__hint">Créneaux en temps réel via Calendly</p>
           </div>
         </div>
       </div>

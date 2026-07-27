@@ -207,6 +207,12 @@ select {
   font-size: 0.875rem;
 }
 
+/* Bouton Contact navbar — coins non arrondis */
+.header__actions .btn--nav-contact,
+.btn--nav-contact {
+  border-radius: 0;
+}
+
 .btn--full {
   width: 100%;
 }
@@ -705,6 +711,53 @@ select {
   padding: 0.7rem 1rem;
   font-size: 0.88rem;
   white-space: nowrap;
+}
+
+/* Carte prise de rendez-vous (Calendly) */
+.rdv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.rdv-card__badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ff8a80;
+  background: rgba(225, 6, 0, 0.15);
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.rdv-card__title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--white);
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.rdv-card__desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin: 0 0 0.9rem;
+}
+
+.rdv-card .search-card__field {
+  margin-bottom: 0.7rem;
+}
+
+.rdv-card__hint {
+  margin: 0.65rem 0 0;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
 }
 
 /* ===== About ===== */
@@ -3092,5 +3145,115 @@ a.car-card {
   .faq__question {
     font-size: 0.92rem;
     padding: 0.95rem 1rem;
+  }
+}
+
+/* ===== Page 404 ===== */
+.error-page {
+  min-height: calc(100vh - var(--header-h) - 200px);
+  display: flex;
+  align-items: center;
+  padding: 3.5rem 0 4.5rem;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(225, 6, 0, 0.08), transparent 60%),
+    var(--white);
+}
+
+.error-page__inner {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.error-page__code {
+  font-size: clamp(5rem, 18vw, 8.5rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+  opacity: 0.95;
+}
+
+.error-page .section-label {
+  justify-content: center;
+  margin-bottom: 0.65rem;
+}
+
+.error-page__title {
+  font-size: clamp(1.55rem, 4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--black);
+  margin: 0 0 0.85rem;
+}
+
+.error-page__desc {
+  font-size: 1rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  max-width: 42ch;
+  margin: 0 auto 1.75rem;
+}
+
+.error-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.error-page__actions .btn {
+  min-height: 48px;
+}
+
+.error-page__contact {
+  background: var(--black) !important;
+  color: var(--white) !important;
+  border: 2px solid var(--black) !important;
+}
+
+.error-page__contact:hover {
+  background: #2a2a2a !important;
+  border-color: #2a2a2a !important;
+}
+
+.error-page__links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.error-page__links a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.error-page__links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .error-page {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .error-page__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error-page__actions .btn {
+    width: 100%;
   }
 }

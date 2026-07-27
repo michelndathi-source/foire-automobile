@@ -64,6 +64,22 @@
 
   ensureNavBack();
 
+  // FAQ : un seul accordéon ouvert à la fois
+  function initFaqAccordion() {
+    const list = document.querySelector(".faq__list");
+    if (!list) return;
+    const items = list.querySelectorAll("details.faq__item");
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  }
+  initFaqAccordion();
+
   // Sticky header shadow
   const header = document.getElementById("header");
   const onScroll = () => {
@@ -93,7 +109,73 @@
     });
   }
 
-  // Search card → catalogue
+  // Calendly — prise de rendez-vous (visite / essai)
+  // Remplacez l’URL par votre lien Calendly personnel ou d’équipe.
+  const FOIRE_CALENDLY_URL =
+    window.FOIRE_CALENDLY_URL ||
+    "https://calendly.com/foireautomobile/visite-dakar";
+
+  function loadCalendlyAssets() {
+    return new Promise((resolve) => {
+      if (window.Calendly) {
+        resolve();
+        return;
+      }
+      if (!document.querySelector('link[data-calendly-css]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://assets.calendly.com/assets/external/widget.css";
+        link.setAttribute("data-calendly-css", "1");
+        document.head.appendChild(link);
+      }
+      const existing = document.querySelector("script[data-calendly-js]");
+      if (existing) {
+        existing.addEventListener("load", () => resolve());
+        if (window.Calendly) resolve();
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      script.setAttribute("data-calendly-js", "1");
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.body.appendChild(script);
+    });
+  }
+
+  function openCalendlyRdv() {
+    const typeEl = document.getElementById("rdvType");
+    const type = typeEl ? typeEl.value : "visite";
+    const typeLabel = {
+      visite: "Visite au parc",
+      essai: "Essai véhicule",
+      rdv: "Rendez-vous conseiller",
+    };
+    const url =
+      FOIRE_CALENDLY_URL +
+      (FOIRE_CALENDLY_URL.indexOf("?") === -1 ? "?" : "&") +
+      "a1=" +
+      encodeURIComponent(typeLabel[type] || type);
+
+    loadCalendlyAssets().then(() => {
+      if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
+        window.Calendly.initPopupWidget({ url: url });
+      } else {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    });
+  }
+
+  const rdvBtn = document.getElementById("rdvCalendly");
+  if (rdvBtn) {
+    rdvBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openCalendlyRdv();
+    });
+  }
+
+  // Ancien bouton recherche → catalogue (si encore présent)
   const searchBtn = document.getElementById("searchCars");
   if (searchBtn) {
     searchBtn.addEventListener("click", () => {

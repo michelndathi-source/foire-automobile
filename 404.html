@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page introuvable — Foire Automobile</title>
+  <meta name="description" content="La page demandée n'existe pas ou a été déplacée. Retrouvez le stock Foire Automobile à Dakar." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <div class="header__start">
+        <button type="button" class="nav-back" id="navBack" aria-label="Page précédente" title="Retour">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          <span>Retour</span>
+        </button>
+        <a href="index.html" class="logo" aria-label="Foire Automobile accueil">
+          <span class="logo__frame">
+            <img src="logo.svg" alt="" class="logo__img" width="48" height="48" />
+            <span class="logo__text">FOIRE AUTOMOBILE</span>
+          </span>
+        </a>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav__link">Accueil</a>
+        <a href="voitures.html" class="nav__link">Véhicules</a>
+        <a href="services.html" class="nav__link">Services</a>
+        <a href="apropos.html" class="nav__link">À propos</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="btn btn--primary btn--sm btn--nav-contact" id="openContact" data-contact-open>Contact</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="error-page" aria-labelledby="errorTitle">
+      <div class="container error-page__inner">
+        <p class="error-page__code" aria-hidden="true">404</p>
+        <p class="section-label">Page introuvable</p>
+        <h1 id="errorTitle" class="error-page__title">
+          Oups, cette route <span class="text-accent">n’existe pas</span>
+        </h1>
+        <p class="error-page__desc">
+          La page que vous cherchez a peut‑être été déplacée ou n’est plus disponible.
+          Revenez à l’accueil ou parcourez notre stock à Dakar.
+        </p>
+        <div class="error-page__actions">
+          <a href="index.html" class="btn btn--primary">
+            Retour à l’accueil
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12h18M3 12l6-6M3 12l6 6"/></svg>
+          </a>
+          <a href="voitures.html" class="btn btn--outline-dark">Voir les véhicules</a>
+          <button type="button" class="btn btn--ghost error-page__contact" data-contact-open>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Nous contacter
+          </button>
+        </div>
+        <ul class="error-page__links">
+          <li><a href="services.html">Nos services</a></li>
+          <li><a href="apropos.html">À propos</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="logo logo--footer" aria-label="Foire Automobile">
+            <span class="logo__frame">
+              <img src="logo.svg" alt="" class="logo__img logo__img--footer" width="56" height="56" />
+              <span class="logo__text">FOIRE AUTOMOBILE</span>
+            </span>
+          </a>
+          <p>Votre partenaire automobile de confiance au Sénégal — vente, échange, mutation, location &amp; transit.</p>
+          <p class="footer__phones">
+            <a href="tel:+221777525807">77 752 58 07</a> ·
+            <a href="tel:+221785970303">78 597 03 03</a> ·
+            <a href="tel:+221785463029">78 546 30 29</a>
+          </p>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4>Entreprise</h4>
+            <a href="index.html">Accueil</a>
+            <a href="apropos.html">À propos</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div class="footer__col">
+            <h4>Stock</h4>
+            <a href="voitures.html">Catalogue</a>
+            <a href="index.html#comment">Comment ça marche</a>
+            <a href="services.html#echange">Échange &amp; mutation</a>
+            <a href="https://wa.me/221777525807" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+          <div class="footer__col">
+            <h4>Contact</h4>
+            <a href="tel:+221777525807">77 752 58 07</a>
+            <a href="tel:+221785970303">78 597 03 03</a>
+            <a href="mailto:contact@foireautomobile.sn">contact@foireautomobile.sn</a>
+            <span class="footer__muted">Dakar, Sénégal</span>
+          </div>
+        </div>
+        <form class="footer__newsletter" id="newsletter">
+          <h4>Restez informé</h4>
+          <p>Nouveautés du stock et offres à Dakar.</p>
+          <div class="footer__newsletter-row">
+            <input type="email" placeholder="Votre e-mail" required aria-label="Adresse e-mail" />
+            <button type="submit" class="btn btn--primary btn--sm">S'abonner</button>
+          </div>
+        </form>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Foire Automobile — Dakar, Sénégal. Tous droits réservés.</p>
+        <div class="footer__social">
+          <a href="https://wa.me/221777525807" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/vehicles.js"></script>
+  <script src="data/cms-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
